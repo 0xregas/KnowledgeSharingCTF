@@ -2,7 +2,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-
 void printFlag(){
 
 	FILE *flagFile = fopen("flag.txt", "r");
@@ -22,23 +21,22 @@ void printFlag(){
 	free(buff); //free memory occupied by the buffer
 }
 
-
-int main(){
-	
-	char changeme[8] = "hello";
-	char name[8];
-	
-
-	printf("Enter your name: ");
-	gets(name);
-
-	if(strcmp(changeme, "hello") != 0)
-	{
-		printFlag();
-	} else {
-		printf("Goodbye, %s \n", name);
-	}
-
-	return 0;
+void win(){
+	printf("You should not be here. \nHere's your flag, get out: ");
+	printFlag();
 }
-///usr/bin/ld: /tmp/ccEolMaT.o: in function `main':
+
+void welcomeFunction(){
+
+	char buffer[12];
+
+	printf("Enter the secret key to get access to the secret function: ");
+	scanf("%s", buffer);
+
+	printf("The secrey key you provided is wrong! Better luck next time");
+}
+
+void main(){
+
+	welcomeFunction();
+}
