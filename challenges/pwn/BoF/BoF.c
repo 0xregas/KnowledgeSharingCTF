@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+
 void printFlag(){
 
 	FILE *flagFile = fopen("flag.txt", "r");
