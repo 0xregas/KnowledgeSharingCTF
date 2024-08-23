@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 void printFlag(){
 
@@ -20,10 +21,12 @@ void printFlag(){
 	free(buff); //free memory occupied by the buffer
 }
 
-int main(){
 
-	char name[8];
+int main(){
+	
 	char changeme[8] = "hello";
+	char name[8];
+	
 
 	printf("Enter your name: ");
 	gets(name);
@@ -31,10 +34,10 @@ int main(){
 	if(strcmp(changeme, "hello") != 0)
 	{
 		printFlag();
-		//hacked();
 	} else {
 		printf("Goodbye, %s \n", name);
 	}
 
 	return 0;
 }
+///usr/bin/ld: /tmp/ccEolMaT.o: in function `main':
