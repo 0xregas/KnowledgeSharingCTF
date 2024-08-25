@@ -21,7 +21,7 @@ void printFlag(){
 }
 
 void win(){
-	printf("You should not be here.Here's your flag, get out: \n"); //print content of the buffer/file
+	printf("You should not be here. Here's your flag, get out: \n"); //print content of the buffer/file
 	printFlag();
 }
 
