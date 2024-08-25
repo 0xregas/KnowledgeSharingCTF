@@ -13,7 +13,6 @@ void printFlag(){
 	//Read the file contents into the buffer
 	size_t bytes_read = fread(buff, 1, buff_size, flagFile);
 	if (bytes_read != 0) {
-		puts("Here is your flag: ");
 		printf("%s", buff); //print content of the buffer/file
 	}
 
@@ -22,18 +21,20 @@ void printFlag(){
 }
 
 void win(){
-	printf("You should not be here. \nHere's your flag, get out: ");
-	printFlag();
+	
+	printf("You should not be here.Here's your flag, get out: "); //print content of the buffer/file
+
 }
 
 void welcomeFunction(){
 
-	char buffer[12];
+	char buffer[16];
 
-	printf("Enter the secret key to get access to the secret function: ");
+	printf("Enter the secret key to get access to the secret function:");
 	scanf("%s", buffer);
+	printf("\n");
 
-	printf("The secrey key you provided is wrong! Better luck next time");
+	printf("The secrey key you provided is wrong! Better luck next time\n");
 }
 
 void main(){
