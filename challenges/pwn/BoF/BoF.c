@@ -41,4 +41,3 @@ int main(){
 
 	return 0;
 }
-///usr/bin/ld: /tmp/ccEolMaT.o: in function `main':
