@@ -1,8 +1,9 @@
 <?php
+	//Loads all cookie related data
 	session_start();
 
 	if (isset($_SESSION['username'])) {
-		header('Location: user.html');
+		header('Location: user.php');
 	}
 
 ?>

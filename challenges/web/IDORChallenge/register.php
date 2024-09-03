@@ -1,5 +1,6 @@
 <?php
-
+	//Loads all cookie related data
+	session_start();
 
 	require('connect.php');
 	if (isset($_POST['username']) && isset($_POST['passw'])){
@@ -12,11 +13,11 @@
 
 		if ($result){
 			echo "User created successfully";
+			header('Location: user.html')
 		}
 		else {
 			echo "User not added";
+			header('Location: register.php');
 		}
 	}
-
-
 ?>
