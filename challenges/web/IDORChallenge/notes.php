@@ -15,10 +15,6 @@
 		$stmt->bind_param("i", $id);
 		$stmt->execute();
 		$result = $stmt->get_result();
-		$row = $result->fetch_assoc();
-
-		$title = $row['noteName'];
-		$description = $row['noteDescription'];
 	}
 
 ?>
@@ -38,11 +34,16 @@
 
 <form>
 	<div class="container">
-		<label for="title"><b>Title:</b></label>
-		<p><?php echo $title ?></p>
+		<?php 
 
-		<label for="description"><b>Description:</b></label>
-		<p><?php echo $description ?></p>
+			while ($row = $result->fetch_assoc()){ 
+				echo "<label for='title'><b>Title:</b></label>";
+				echo "<p>".$row['noteName']."</p>";
+			
+				echo "<label for='description'><b>Description:</b></label>";
+				echo "<p>".$row['noteDescription']."</p>";
+			}
+		?>
 	</div>
 </form>
 
