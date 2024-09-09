@@ -33,18 +33,22 @@
 </div>
 
 <form>
-	<div class="container">
-		<?php 
-
-			while ($row = $result->fetch_assoc()){ 
-				echo "<label for='title'><b>Title:</b></label>";
-				echo "<p>".$row['noteName']."</p>";
-			
-				echo "<label for='description'><b>Description:</b></label>";
-				echo "<p>".$row['noteDescription']."</p>";
-			}
-		?>
+	<div id="button">
+		<button type="button" onclick="window.location.href='/user.php';">Go back</button>
 	</div>
+	<?php 
+		while ($row = $result->fetch_assoc()){ 
+			echo "<div class='container'>";
+
+			echo "<label for='title'><b>Title:</b></label>";
+			echo "<p>".$row['noteName']."</p>";
+
+			echo "<label for='description'><b>Description:</b></label>";
+			echo "<p>".$row['noteDescription']."</p>";
+		
+			echo "</div>";
+		}
+	?>
 </form>
 
 </body>
@@ -56,12 +60,20 @@
 	}
 
 	form {
-		padding: 5% 10%;
+		padding: 3% 10%;
 		border: 3px solid #f1f1f1;
+	}
+
+	button {
+		background-color:  #1abc9c;
+		width: 60%;
+		color: white;
 	}
 
 	.container {
 		padding: 16px;
+		border-style: double;
+		margin-top: 10px;
 	}
 
 	.header {
@@ -70,6 +82,10 @@
 		background: #1abc9c;
 		color: white;
 		font-sixe: 30px;
+	}
+
+	#button {
+		text-align: center;
 	}
 
 </style>
