@@ -17,12 +17,6 @@
 			$_SESSION['id'] = $row['id'];
 			$_SESSION['username'] = $row['username'];
 
-			if ($row['isAdmin'] == 1){
-				setcookie('isAdmin', 1);
-			}
-			else {
-				setcookie('isAdmin', 0);
-			}
 			header('Location: user.php');
 		}
 		else {
