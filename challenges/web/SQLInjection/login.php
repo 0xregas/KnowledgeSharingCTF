@@ -7,9 +7,8 @@
 		$username = $_POST['username'];
 		$password = $_POST['passw'];
 
-		$stmt = $conn->prepare("SELECT id, username, password, isAdmin from users where username=? and password=?");
-		$stmt->bind_param("ss", $username, $password);
-		$result = $stmt->execute();
+		$query = "SELECT id, username, password, isAdmin from users where username='$username' and password='$password'";
+		$result = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($result) > 0) {
 			$row = $result->fetch_assoc();
