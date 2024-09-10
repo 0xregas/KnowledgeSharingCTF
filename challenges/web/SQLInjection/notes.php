@@ -1,53 +1,70 @@
 <?php
 	session_start();
+
 	if (!isset($_SESSION['id'])){
 		header('Location: index.php');
 	}
 
 	require('connect.php');
 
+	function validateID($id) {
+		$idUrl = $_GET['id'];
+		$idSession = $_SESSION['id'];
+
+		if ($idUrl == $idSession) {
+			return true;
+		}
+		return false;
+	}
+
+	if (isset($_GET['id'])){
+		$id = $_GET['id'];
+
+		$stmt = $conn->prepare("SELECT noteName, noteDescription from note where id = ?");
+		$stmt->bind_param("i", $id);
+		$stmt->execute();
+		$result = $stmt->get_result();
+	}
+
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
+	<title>Notes</title>
 </head>
 <body>
 
 <div class="header">
-	<h2>List of users in the system:</h2>
+	<h2>All your notes are here:</h2>
 </div>
 
 <form>
 	<div id="button">
 		<button type="button" onclick="window.location.href='/user.php';">Go back</button>
 	</div>
-
-	<?php 
-		if (isset($_COOKIE['isAdmin']) && $_COOKIE['isAdmin'] == 1){
-			$query = "SELECT * FROM users";
-			$result = mysqli_query($conn, $query);
+	<?php
+		if (validateID($id)){
 
 			while ($row = $result->fetch_assoc()){ 
 				echo "<div class='container'>";
 
-				echo "<label for='username'><b>User:</b></label>";
-				echo "<p>".$row['username']."</p>";
-			
-				echo "<label for='password'><b>Password:</b></label>";
-				echo "<p>".$row['password']."</p>";
+				echo "<label for='title'><b>Title:</b></label>";
+				echo "<p>".$row['noteName']."</p>";
 
+				echo "<label for='description'><b>Description:</b></label>";
+				echo "<p>".$row['noteDescription']."</p>";
+			
 				echo "</div>";
 			}
 		} else {
 			echo "<div class='buttonContainer'>";
-			echo "Only admins are allowed access on this page. Maybe you can one day you'll get there.";
+			echo "You are not allowed to see this.";
 			echo "</div>";
 		}
 	?>
-
 </form>
 
 </body>
@@ -76,7 +93,7 @@
 	.container {
 		padding: 16px;
 		border-style: double;
-		margin-top: 10px;	
+		margin-top: 10px;
 	}
 
 	.header {
@@ -90,7 +107,6 @@
 	#button {
 		text-align: center;
 	}
-
 
 </style>
 </html>
