@@ -6,10 +6,19 @@
 	}
 
 	require('connect.php');
+
+	function validateID($id) {
+		$idUrl = $_GET['id'];
+		$idSession = $_SESSION['id'];
+
+		if ($idUrl == $idSession) {
+			return true;
+		}
+		return false;
+	}
+
 	if (isset($_GET['id'])){
 		$id = $_GET['id'];
-
-
 
 		$stmt = $conn->prepare("SELECT noteName, noteDescription from note where id = ?");
 		$stmt->bind_param("i", $id);
@@ -33,18 +42,29 @@
 </div>
 
 <form>
-	<div class="container">
-		<?php 
+	<div id="button">
+		<button type="button" onclick="window.location.href='/user.php';">Go back</button>
+	</div>
+	<?php
+		if (validateID($id)){
 
 			while ($row = $result->fetch_assoc()){ 
+				echo "<div class='container'>";
+
 				echo "<label for='title'><b>Title:</b></label>";
 				echo "<p>".$row['noteName']."</p>";
-			
+
 				echo "<label for='description'><b>Description:</b></label>";
 				echo "<p>".$row['noteDescription']."</p>";
+			
+				echo "</div>";
 			}
-		?>
-	</div>
+		} else {
+			echo "<div class='buttonContainer'>";
+			echo "You are not allowed to see this.";
+			echo "</div>";
+		}
+	?>
 </form>
 
 </body>
@@ -56,12 +76,24 @@
 	}
 
 	form {
-		padding: 5% 10%;
+		padding: 3% 10%;
 		border: 3px solid #f1f1f1;
+	}
+
+	button {
+		background-color:  #1abc9c;
+		width: 8%;
+		color: white;
+	}
+
+	.buttonContainer {
+		margin: 5%;
 	}
 
 	.container {
 		padding: 16px;
+		border-style: double;
+		margin-top: 10px;
 	}
 
 	.header {
@@ -70,6 +102,10 @@
 		background: #1abc9c;
 		color: white;
 		font-sixe: 30px;
+	}
+
+	#button {
+		text-align: center;
 	}
 
 </style>

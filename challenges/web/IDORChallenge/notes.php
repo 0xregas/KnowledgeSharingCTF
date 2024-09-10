@@ -66,7 +66,7 @@
 
 	button {
 		background-color:  #1abc9c;
-		width: 60%;
+		width: 8%;
 		color: white;
 	}
 

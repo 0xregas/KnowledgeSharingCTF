@@ -36,24 +36,33 @@
 </div>
 
 <form>
-	<div class="container">
-		<?php 
-			if (isset($_COOKIE['isAdmin']) && $_COOKIE['isAdmin'] == 1){
-				$query = "SELECT * FROM users";
-				$result = mysqli_query($conn, $query);
-
-				while ($row = $result->fetch_assoc()){ 
-					echo "<label for='username'><b>User:</b></label>";
-					echo "<p>".$row['username']."</p>";
-				
-					echo "<label for='password'><b>Password:</b></label>";
-					echo "<p>".$row['password']."</p>";
-				}
-			} else {
-				echo "Only admins are allowed access on this page. Maybe you can one day you'll get there.";
-			}
-		?>
+	<div id="button">
+		<button type="button" onclick="window.location.href='/user.php';">Go back</button>
 	</div>
+
+	<?php 
+		if (isset($_COOKIE['isAdmin']) && $_COOKIE['isAdmin'] == 1){
+			$query = "SELECT * FROM users";
+			$result = mysqli_query($conn, $query);
+
+			while ($row = $result->fetch_assoc()){ 
+				echo "<div class='container'>";
+
+				echo "<label for='username'><b>User:</b></label>";
+				echo "<p>".$row['username']."</p>";
+			
+				echo "<label for='password'><b>Password:</b></label>";
+				echo "<p>".$row['password']."</p>";
+
+				echo "</div>";
+			}
+		} else {
+			echo "<div class='buttonContainer'>";
+			echo "Only admins are allowed access on this page. Maybe you can one day you'll get there.";
+			echo "</div>";
+		}
+	?>
+
 </form>
 
 </body>
@@ -65,12 +74,24 @@
 	}
 
 	form {
-		padding: 5% 10%;
+		padding: 3% 10%;
 		border: 3px solid #f1f1f1;
+	}
+
+	button {
+		background-color:  #1abc9c;
+		width: 8%;
+		color: white;
+	}
+
+	.buttonContainer {
+		margin: 5%;
 	}
 
 	.container {
 		padding: 16px;
+		border-style: double;
+		margin-top: 10px;	
 	}
 
 	.header {
@@ -80,6 +101,11 @@
 		color: white;
 		font-sixe: 30px;
 	}
+
+	#button {
+		text-align: center;
+	}
+
 
 </style>
 </html>
