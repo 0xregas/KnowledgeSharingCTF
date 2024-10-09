@@ -28,7 +28,7 @@ int main(){
 	char name[8];
 	int admin;
 
-	printf("Enter your name: ");
+	printf("Enter your name: \n");
 	gets(name);
 
 	if(admin==0x41414141)
