@@ -16,14 +16,18 @@ void printFlag(){
 	if (bytes_read != 0) {
 		puts("Here is your flag: ");
 		printf("%s", buff); //print content of the buffer/file
+		fflush(stdout);
 	}
 
 	fclose(flagFile); //close file
 	free(buff); //free memory occupied by the buffer
 }
 
+void banner(){
+	puts("Welcome to the Honey Badgers CTF");	
+}
 
-int main(){
+void challenge(){
 	
 	char name[8];
 	int admin;
@@ -38,5 +42,14 @@ int main(){
 		printf("Goodbye, %s \n", name);
 	}
 
-	return 0;
+	return;
+}
+
+int main(int argc, char* argv[]){
+        setvbuf(stdout, 0LL, 2, 0LL);
+        setvbuf(stdin, 0LL, 1, 0LL);
+        banner();
+        challenge();
+
+        return 0;
 }

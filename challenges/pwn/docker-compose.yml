@@ -1,0 +1,28 @@
+services:
+    challenge1:
+      build:
+        context: ./BoF
+        dockerfile: Dockerfile
+      ports:
+        - "1337:1337"
+    
+    challenge2:
+      build:
+        context: ./BoF2
+        dockerfile: Dockerfile
+      ports: 
+        - "1338:1338"
+
+    challenge3:
+      build:
+        context: ./BoF3
+        dockerfile: Dockerfile
+      ports:
+        - "1339:1339"
+
+    challenge4:
+      build:
+        context: ./ret2win
+        dockerfile: Dockerfile
+      ports:
+        - "1340:1340"

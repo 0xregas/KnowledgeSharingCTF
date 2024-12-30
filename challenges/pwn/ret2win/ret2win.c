@@ -14,6 +14,7 @@ void printFlag(){
 	size_t bytes_read = fread(buff, 1, buff_size, flagFile);
 	if (bytes_read != 0) {
 		printf("%s\n", buff); //print content of the buffer/file
+		fflush(stdout);
 	}
 
 	fclose(flagFile); //close file
@@ -25,6 +26,10 @@ void win(){
 	printFlag();
 }
 
+void banner(){
+	puts("Welcome to the Honey Badgers CTF");	
+}
+
 void welcomeFunction(){
 
 	char buffer[16];
@@ -32,11 +37,15 @@ void welcomeFunction(){
 	printf("Enter the secret key to get access to the secret function: \n"); // pwntools recvline waits for \n
 	scanf("%s", buffer);
 	
-	printf("The secrey key you provided is wrong! Better luck next time %s\n", buffer);
+	printf("The secrey key you provided is wrong! Better luck next time\n");
+	fflush(stdout);
 }
 
-int main(void){
+int main(int argc, char* argv[]){
+    setvbuf(stdout, 0LL, 2, 0LL);
+    setvbuf(stdin, 0LL, 1, 0LL);
+    banner();
+    welcomeFunction();
 
-	welcomeFunction();
-	return 0;
+    return 0;
 }
