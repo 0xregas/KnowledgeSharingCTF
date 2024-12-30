@@ -24,7 +24,7 @@ void printFlag(){
 }
 
 void banner(){
-	printf("Welcome to Honey Badgers CTF \n");
+	puts("Welcome to Honey Badgers CTF");
 
 	return;
 }
@@ -41,17 +41,18 @@ void challenge(){
 	{
 		printFlag();
 	} else {
-		printf("Goodbye, %s \n", name);
+		printf("Goodbye, %s\n", name);
+		fflush(stdout);
 	}
 
 	return;
 }
 
-void main(int argc, char* argv[]){
+int main(int argc, char* argv[]){
 	setvbuf(stdout, 0LL, 2, 0LL);
 	setvbuf(stdin, 0LL, 1, 0LL);
 	banner();	
 	challenge();
-	fflush(stdout);
-	return;
+	
+	return 0;
 }
