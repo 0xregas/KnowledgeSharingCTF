@@ -2,10 +2,9 @@
 	//Loads all cookie related data
 	session_start();
 
-	if (isset($_SESSION['username'])) {
-		header('Location: user.php');
+	if(!isset($_SESSION['id'])){
+		header('Location: index.php');
 	}
-
 ?>
 
 <!DOCTYPE html>
@@ -18,18 +17,18 @@
 <body>
 
 <div class="header">
-	<h2>Hello world</h2>
+	<h2>Notebook of <?php echo $_SESSION['username'] ?></h2>
 	<p>Hello again, world!</p>
 </div>
 
 <div class="navbar">
 	<ul>
-		<li><a href="#home">Home</a></li>
-		<li><a href="#news">News</a></li>
+		<li><a href="/user.php">Home</a></li>
+		<li><a href="/notes.php?id=<?php echo $_SESSION['id']?>">My notes</a></li>
+		<li><a href="/addNote.html">Add Note</a></li>
 		<li><a href="#contact">Contact</a></li>
 		<li><a href="#about">About</a></li>
-		<li style="float:right;padding-right: 1%;"><a href="/login.html">Login</a></li>
-		<li style="float:right"><a href="/register.html">Register</a></li>
+		<li style="float:right;padding-right: 1%;"><a href="/logout.php">Logout</a></li>
 	</ul>
 </div>
 
