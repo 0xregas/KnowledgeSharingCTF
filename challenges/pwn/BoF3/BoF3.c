@@ -24,35 +24,34 @@ void printFlag(){
 }
 
 void banner(){
-	puts("Welcome to Honey Badgers CTF");
-
-	return;
+	puts("Welcome to the Honey Badgers CTF");	
 }
 
 void challenge(){
-	char changeme[8] = "hello";
-	char name[8];
 	
+	char name[8];
+	int admin = 0x123456789;
+
 	printf("Enter your name: \n");
-	fflush(stdout);
 	gets(name);
 
-	if(strcmp(changeme, "hello") != 0)
+	if(admin == 0xdeadbeef)
 	{
 		printFlag();
 	} else {
-		printf("Goodbye, %s\n", name);
+		printf("Goodbye, %s \n", name);
 		fflush(stdout);
 	}
 
 	return;
 }
 
+
 int main(int argc, char* argv[]){
-	setvbuf(stdout, 0LL, 2, 0LL);
-	setvbuf(stdin, 0LL, 1, 0LL);
-	banner();	
-	challenge();
-	
-	return 0;
+    setvbuf(stdout, 0LL, 2, 0LL);
+    setvbuf(stdin, 0LL, 1, 0LL);
+    banner();
+    challenge();
+
+    return 0;
 }
