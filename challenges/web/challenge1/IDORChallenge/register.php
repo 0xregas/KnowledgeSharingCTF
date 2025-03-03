@@ -11,7 +11,7 @@
 		#$query = "INSERT INTO users (username, password) VALUES ('teste', 'teste')";
 		$result = mysqli_query($conn, $query);
 
-		$queryId = $conn->prepare("SELECT id from users where username=?");
+		$queryId = $conn->prepare("SELECT UserId from users where username=?");
 		$queryId->bind_param("s", $username);
 		$queryId->execute();
 		$result = $queryId->get_result();
@@ -19,7 +19,7 @@
 
 		if ($result){
 			echo "User created successfully";
-			$_SESSION['id'] = $row['id'];
+			$_SESSION['userId'] = $row['userId'];
 			$_SESSION['username'] = $user;
 			header('Location: user.php');
 		}
