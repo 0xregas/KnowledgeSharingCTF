@@ -7,14 +7,14 @@
 		$username = $_POST['username'];
 		$password = $_POST['passw'];
 
-		$stmt = $conn->prepare("SELECT id, username, password, isAdmin from users where username=? and password=?");
+		$stmt = $conn->prepare("SELECT userId, username, password, isAdmin from users where username=? and password=?");
 		$stmt->bind_param("ss", $username, $password);
 		$result = $stmt->execute();
 
 		if (mysqli_num_rows($result) > 0) {
 			$row = $result->fetch_assoc();
 
-			$_SESSION['id'] = $row['id'];
+			$_SESSION['userId'] = $row['UserId'];
 			$_SESSION['username'] = $row['username'];
 
 			header('Location: user.php');

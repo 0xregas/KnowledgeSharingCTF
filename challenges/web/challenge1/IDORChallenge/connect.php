@@ -2,7 +2,7 @@
 	
 	$user = 'hbctf';
 	$pass = 'hbctf';
-	$host = 'localhost';
+	$host = 'mysql';
 	$dabatase = 'notes';
 
 	$conn = new mysqli($host, $user, $pass, $dabatase);
