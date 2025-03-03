@@ -3,7 +3,7 @@
 	$user = 'hbctf';
 	$pass = 'hbctf';
 	$host = 'mysql';
-	$dabatase = 'notes';
+	$dabatase = 'webchal1_notes';
 
 	$conn = new mysqli($host, $user, $pass, $dabatase);
 
