@@ -6,7 +6,7 @@ INSERT INTO users (username, password, isAdmin) VALUES
 ('jrgeo','only4YOU',0),
 ('user2','pass123',0),
 ('flag_user','superstrongpassword',0),
-('admin','admin',0);
+('admin','admin',1),
 ('honeyBadger','strongpassword',0);
 
 INSERT INTO note (userID, noteName, noteDescription) VALUES
