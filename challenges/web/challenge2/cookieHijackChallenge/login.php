@@ -7,17 +7,19 @@
 		$username = $_POST['username'];
 		$password = $_POST['passw'];
 
-		$stmt = $conn->prepare("SELECT id, username, password, isAdmin from users where username=? and password=?");
+		$stmt = $conn->prepare("SELECT userId, username, isAdmin from users where username=? and password=?");
 		$stmt->bind_param("ss", $username, $password);
-		$result = $stmt->execute();
+		$stmt->execute();
+		$stmt->bind_result($userId, $username, $isAdmin);i
+		$stmt->store_result();
 
-		if (mysqli_num_rows($result) > 0) {
-			$row = $result->fetch_assoc();
+		if ($stmt->num_rows == 1) {
+			$stmt->fetch();
 
-			$_SESSION['id'] = $row['id'];
-			$_SESSION['username'] = $row['username'];
+			$_SESSION['userId'] = $userId;
+			$_SESSION['username'] = $username;
 
-			if ($row['isAdmin'] == 1){
+			if ($isAdmin == 1){
 				setcookie('isAdmin', 1);
 			}
 			else {

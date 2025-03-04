@@ -19,7 +19,7 @@
 
 		if ($result){
 			echo "User created successfully";
-			$_SESSION['id'] = $row['id'];
+			$_SESSION['iuserI'] = $row['userId'];
 			$_SESSION['username'] = $user;
 			header('Location: user.php');
 		}

@@ -2,8 +2,8 @@
 	
 	$user = 'hbctf';
 	$pass = 'hbctf';
-	$host = 'localhost';
-	$dabatase = 'notes';
+	$host = 'mysql';
+	$dabatase = 'webchal2_notes';
 
 	$conn = new mysqli($host, $user, $pass, $dabatase);
 
