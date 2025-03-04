@@ -1,15 +1,15 @@
 <?php
 	session_start();
 
-	if (!isset($_SESSION['id'])){
+	if (!isset($_SESSION['userId'])){
 		header('Location: index.php');
 	}
 
 	require('connect.php');
 
-	function validateID($id) {
-		$idUrl = $_GET['id'];
-		$idSession = $_SESSION['id'];
+	function validateID($userId) {
+		$idUrl = $_GET['userId'];
+		$idSession = $_SESSION['userId'];
 
 		if ($idUrl == $idSession) {
 			return true;
@@ -17,10 +17,10 @@
 		return false;
 	}
 
-	if (isset($_GET['id'])){
-		$id = $_GET['id'];
+	if (isset($_GET['userId'])){
+		$id = $_GET['userId'];
 
-		$stmt = $conn->prepare("SELECT noteName, noteDescription from note where id = ?");
+		$stmt = $conn->prepare("SELECT noteName, noteDescription from note where userId = ?");
 		$stmt->bind_param("i", $id);
 		$stmt->execute();
 		$result = $stmt->get_result();
@@ -46,7 +46,7 @@
 		<button type="button" onclick="window.location.href='/user.php';">Go back</button>
 	</div>
 	<?php
-		if (validateID($id)){
+		if (validateID($userId)){
 
 			while ($row = $result->fetch_assoc()){ 
 				echo "<div class='container'>";

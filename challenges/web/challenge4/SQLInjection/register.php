@@ -11,16 +11,17 @@
 		#$query = "INSERT INTO users (username, password) VALUES ('teste', 'teste')";
 		$result = mysqli_query($conn, $query);
 
-		$queryId = $conn->prepare("SELECT id from users where username=?");
-		$queryId->bind_param("s", $username);
-		$queryId->execute();
-		$result = $queryId->get_result();
-		$row = $result->fetch_assoc();
+		$query = $conn->prepare("SELECT userId, username from users where username=?");
+		$query->bind_param("s", $username);
+		$query->execute();
+		$query->bind_result($userId, $username)
+		$query->store_result();
+		$login = $quey->fetch_assoc();
 
-		if ($result){
+		if ($login){
 			echo "User created successfully";
-			$_SESSION['id'] = $row['id'];
-			$_SESSION['username'] = $user;
+			$_SESSION['userId'] = $userId;
+			$_SESSION['username'] = $username;
 			header('Location: user.php');
 		}
 		else {

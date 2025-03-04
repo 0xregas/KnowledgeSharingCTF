@@ -2,7 +2,7 @@
 	//Loads all cookie related data
 	session_start();
 
-	if(!isset($_SESSION['id'])){
+	if(!isset($_SESSION['userId'])){
 		header('Location: index.php');
 	}
 
@@ -25,7 +25,7 @@
 <div class="navbar">
 	<ul>
 		<li><a href="/user.php">Home</a></li>
-		<li><a href="/notes.php?id=<?php echo $_SESSION['id']?>">My notes</a></li>
+		<li><a href="/notes.php?userId=<?php echo $_SESSION['userId']?>">My notes</a></li>
 		<li><a href="/addNote.html">Add Note</a></li>
 		<li><a href="/users.php">List Users</a></li>
 		<li><a href="#about">About</a></li>
@@ -35,11 +35,11 @@
 
 <?php
 
-	if ($_SESSION['id'] == 1) {
+	if ($_SESSION['userId'] == 1) {
 
 		require('connect.php');
-		$id = $_SESSION['id'];
-		$query = "SELECT password from users where id = '$id'";
+		$id = $_SESSION['userId'];
+		$query = "SELECT password from users where userId = '$userId'";
 		$result = mysqli_query($conn, $query);
 		$row = $result->fetch_assoc();
 		echo "<div class='sqlInjection'>";

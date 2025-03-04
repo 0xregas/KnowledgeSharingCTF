@@ -7,13 +7,13 @@
 		$username = $_POST['username'];
 		$password = $_POST['passw'];
 
-		$query = "SELECT id, username, password, isAdmin from users where username='$username' and password='$password'";
+		$query = "SELECT userId, username, isAdmin from users where username='$username' and password='$password'";
 		$result = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($result) > 0) {
 			$row = $result->fetch_assoc();
 
-			$_SESSION['id'] = $row['id'];
+			$_SESSION['userId'] = $row['userId'];
 			$_SESSION['username'] = $row['username'];
 
 			if ($row['isAdmin'] == 1){
