@@ -1,76 +1,96 @@
 services:
-  mysql: mysql:latest
-  container_name: mysql_db
-  restart: always
-  environment:
-    MYSQL_ROOT_PASSWORD: myrootpwd
-    MYSQL_DATABASE: notes
-    MYSQL_USER: hbctf
-    MYSQL_PASSWORD: hbctf
-  ports:
-    - "3306:3306"
-  volumes:
-    - mysql_data:/var/lib/mysql
-    - ./mysql-files:/docker-entrypoint-initdb.d
-  networks:
-    - ctf_network
+  mysql: 
+    image: mysql:latest
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: myrootpwd
+      MYSQL_DATABASE: notes
+      MYSQL_USER: hbctf
+      MYSQL_PASSWORD: hbctf
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql-files:/docker-entrypoint-initdb.d
+    networks:
+      - ctf_network
 
   webchallenge1:
-    context: ./challenge1    
-    dockerfile: Dockerfile
-  ports:
-    - "8000:45650"
-  depends_on:
-    - mysql
-  environment:
-    DATABASE_HOST: mysql
-    DATABASE_USER: hbctf
-    DATABASE_PASSWORD: hbctf
-    DATABASE_NAME: notes
-  networks:
-    - ctf_network
+    build:
+      context: ./challenge1    
+      dockerfile: Dockerfile
+    ports:
+      - "45650:8000"
+    depends_on:
+      - mysql
+    environment:
+      DATABASE_HOST: mysql
+      DATABASE_USER: hbctf
+      DATABASE_PASSWORD: hbctf
+      DATABASE_NAME: notes
+    networks:
+      - ctf_network
 
   webchallenge2:
-    context: ./challenge2
-    dockerfile: Dockerfile
-  ports:
-    - "8001:45750"
-  depends_on:
-    - mysql
-  environment:
-    DATABASE_HOST: mysql
-    DATABASE_USER: hbctf
-    DATABASE_PASSWORD: hbctf
-    DATABASE_NAME: notes
-  networks:
-    - ctf_network
+    build:
+      context: ./challenge2
+      dockerfile: Dockerfile
+    ports:
+      - "45750:8001"
+    volumes:
+      - challenge2:/var/www/html
+    depends_on:
+      - mysql
+    environment:
+      DATABASE_HOST: mysql
+      DATABASE_USER: hbctf
+      DATABASE_PASSWORD: hbctf
+      DATABASE_NAME: notes
+    networks:
+      - ctf_network
 
   webchallenge3:
-    context: ./challenge3
-    dockerfile: Dockerfile
-  ports:
-    - "8002:45850"
-  depends_on:
-    - mysql
-  environment:
-    DATABASE_HOST: mysql
-    DATABASE_USER: hbctf
-    DATABASE_PASSWORD: hbctf
-    DATABASE_NAME: notes
-  networks:
-    - ctf_network
+    build:
+      context: ./challenge3
+      dockerfile: Dockerfile
+    ports:
+      - "45850:8002"
+    volumes:
+      - challenge3:/var/www/html
+    depends_on:
+      - mysql
+    environment:
+      DATABASE_HOST: mysql
+      DATABASE_USER: hbctf
+      DATABASE_PASSWORD: hbctf
+      DATABASE_NAME: notes
+    networks:
+      - ctf_network
 
   webchallenge4:
-    context: ./challenge4
-    dockerfile: Dockerfile
-  ports:
-    - "8003:45950"
-  depends_on:
-    - mysql
-  environment:
-    DATABASE_HOST: mysql
-    DATABASE_USER: hbctf
-    DATABASE_PASSWORD: hbctf
-    DATABASE_NAME: notes
-  networks:
-    - ctf_network
+    build:
+      context: ./challenge4
+      dockerfile: Dockerfile
+    ports:
+      - "45950:8003"
+    volumes:
+      - challenge4:/var/www/html
+    depends_on:
+      - mysql
+    environment:
+      DATABASE_HOST: mysql
+      DATABASE_USER: hbctf
+      DATABASE_PASSWORD: hbctf
+      DATABASE_NAME: notes
+    networks:
+      - ctf_network
+
+volumes:
+  mysql_data:
+  challenge2:
+  challenge3:
+  challenge4:
+
+networks:
+  ctf_network:

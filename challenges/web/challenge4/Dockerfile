@@ -1,11 +1,13 @@
 FROM php:8.2
 
-RUN apt-update
+RUN apt-get update && apt-get install -y
+
+RUN docker-php-ext-install pdo pdo_mysql mysqli
 
 #RUN useradd -d /home/ctf -m -p ctf -s /bin/bash ctf
 #RUN echo "ctf:ctf" | chpasswd
 
-RUN docker-php-ext-install msqli pdo pdo_mysql
+#RUN docker-php-ext-install msqli pdo pdo_mysql
 
 WORKDIR /var/www/html
 

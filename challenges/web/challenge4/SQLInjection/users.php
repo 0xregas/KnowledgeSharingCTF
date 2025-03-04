@@ -5,7 +5,23 @@
 	}
 
 	require('connect.php');
+	
+	function allowed_to_list_users(){
+		require('connect.php');
 
+		$stmt = $conn->prepare("SELECT isAdmin FROM users WHERE userId=?");
+		$stmt->bind_param('i', $_SESSION['userId']);
+		$stmt->execute();
+		$stmt->bind_result($isAdmin);
+		$stmt->store_result();
+
+		$stmt->fetch();
+		if ($isAdmin == 1){
+			return true;
+		}
+
+		return false;
+	}	
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,7 +42,7 @@
 	</div>
 
 	<?php 
-		if (isset($_COOKIE['isAdmin']) && $_COOKIE['isAdmin'] == 1){
+		if (allowed_to_list_users()){
 			$query = "SELECT * FROM users";
 			$result = mysqli_query($conn, $query);
 

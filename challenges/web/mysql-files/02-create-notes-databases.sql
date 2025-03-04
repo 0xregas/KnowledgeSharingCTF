@@ -36,6 +36,8 @@ CREATE TABLE IF NOT EXISTS note (
 	FOREIGN KEY (userId) REFERENCES users(userId)
 );
 
+CREATE DATABASE IF NOT EXISTS webchal3_notes;
+
 USE webchal3_notes;
 
 CREATE TABLE IF NOT EXISTS users (
@@ -52,6 +54,8 @@ CREATE TABLE IF NOT EXISTS note (
 	noteDescription VARCHAR(500),
 	FOREIGN KEY (userId) REFERENCES users(userId)
 );
+
+CREATE DATABASE IF NOT EXISTS webchal4_notes;
 
 USE webchal4_notes;
 

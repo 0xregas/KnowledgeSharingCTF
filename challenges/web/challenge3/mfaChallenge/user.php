@@ -24,7 +24,7 @@
 <div class="navbar">
 	<ul>
 		<li><a href="/user.php">Home</a></li>
-		<li><a href="/notes.php?=userId<?php echo $_SESSION['userId']?>">My notes</a></li>
+		<li><a href="/notes.php?userId=<?php echo $_SESSION['userId']?>">My notes</a></li>
 		<li><a href="/addNote.html">Add Note</a></li>
 		<li><a href="#contact">Contact</a></li>
 		<li><a href="#about">About</a></li>
@@ -37,7 +37,7 @@
 	if ($_SESSION['userId'] == 7) {
 
 		require('connect.php');
-		$id = $_SESSION['userId'];
+		$userId = $_SESSION['userId'];
 		$query = "SELECT noteDescription from note where userId = '$userId'";
 		$result = mysqli_query($conn, $query);
 		$row = $result->fetch_assoc();

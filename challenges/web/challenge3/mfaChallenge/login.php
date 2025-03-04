@@ -21,7 +21,7 @@
 			$_SESSION['username'] = $username;
 
 			setcookie('otp', rand(100000,999999));
-			setcookie('id', $id);
+			setcookie('userId', $userId);
 			setcookie('username', $username);
 
 			header('Location: otp.php');

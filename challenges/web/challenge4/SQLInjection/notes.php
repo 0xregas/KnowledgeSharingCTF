@@ -7,7 +7,7 @@
 
 	require('connect.php');
 
-	function validateID($userId) {
+	function validateID() {
 		$idUrl = $_GET['userId'];
 		$idSession = $_SESSION['userId'];
 
@@ -18,10 +18,10 @@
 	}
 
 	if (isset($_GET['userId'])){
-		$id = $_GET['userId'];
+		$userId = $_GET['userId'];
 
 		$stmt = $conn->prepare("SELECT noteName, noteDescription from note where userId = ?");
-		$stmt->bind_param("i", $id);
+		$stmt->bind_param("i", $userId);
 		$stmt->execute();
 		$result = $stmt->get_result();
 	}
@@ -46,7 +46,7 @@
 		<button type="button" onclick="window.location.href='/user.php';">Go back</button>
 	</div>
 	<?php
-		if (validateID($userId)){
+		if (validateID()){
 
 			while ($row = $result->fetch_assoc()){ 
 				echo "<div class='container'>";
@@ -64,7 +64,7 @@
 			echo "You are not allowed to see this.";
 			echo "</div>";
 		}
-	?>
+	?>		
 </form>
 
 </body>
