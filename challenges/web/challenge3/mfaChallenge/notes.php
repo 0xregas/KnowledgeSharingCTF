@@ -1,17 +1,17 @@
 <?php
 	session_start();
 
-	if (!isset($_SESSION['id'])){
+	if (!isset($_SESSION['userId'])){
 		header('Location: index.php');
 	}
 
 	require('connect.php');
-	if (isset($_GET['id'])){
-		$id = $_GET['id'];
+	if (isset($_GET['userId'])){
+		$userId = $_GET['userId'];
 
 
 
-		$stmt = $conn->prepare("SELECT noteName, noteDescription from note where id = ?");
+		$stmt = $conn->prepare("SELECT noteName, noteDescription from note where userId = ?");
 		$stmt->bind_param("i", $id);
 		$stmt->execute();
 		$result = $stmt->get_result();

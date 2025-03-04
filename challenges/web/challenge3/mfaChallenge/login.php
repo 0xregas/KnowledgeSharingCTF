@@ -7,24 +7,22 @@
 		$username = $_POST['username'];
 		$password = $_POST['passw'];
 
-		$stmt = $conn->prepare("SELECT id, username, password from users where username=? and password=?");
+		$stmt = $conn->prepare("SELECT userId, username from users where username=? and password=?");
 		$stmt->bind_param("ss", $username, $password);
 		$stmt->execute();
-		$stmt->bind_result($id, $username, $password);
+		$stmt->bind_result($userId, $username);
 		$stmt->store_result();
 
-		if ($stmt->num_rows > 0) {
+		if ($stmt->num_rows == 1) {
 
 			$stmt->fetch();
 
-			$_SESSION['id'] = $id;
+			$_SESSION['userId'] = $userId;
 			$_SESSION['username'] = $username;
 
 			setcookie('otp', rand(100000,999999));
 			setcookie('id', $id);
 			setcookie('username', $username);
-			setcookie('password', $password);
-
 
 			header('Location: otp.php');
 		}
